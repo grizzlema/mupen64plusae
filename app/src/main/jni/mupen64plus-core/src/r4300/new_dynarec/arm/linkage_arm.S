@@ -73,30 +73,30 @@ BSS_SECTION
     .align   12
     GLOBAL_VARIABLE(extra_memory, 33554432)
     GLOBAL_VARIABLE(dynarec_local, 64)
-    GLOBAL_VARIABLE(next_interupt, 4)
+    GLOBAL_VARIABLE(g_dev_r4300_cp0_next_interrupt, 4)
     GLOBAL_VARIABLE(cycle_count, 4)
     GLOBAL_VARIABLE(last_count, 4)
     GLOBAL_VARIABLE(pending_exception, 4)
     GLOBAL_VARIABLE(pcaddr, 4)
-    GLOBAL_VARIABLE(stop, 4)
+    GLOBAL_VARIABLE(g_dev_r4300_stop, 4)
     GLOBAL_VARIABLE(invc_ptr, 4)
-    GLOBAL_VARIABLE(address, 4)
+    GLOBAL_VARIABLE(g_dev_mem_address, 4)
     GLOBAL_VARIABLE(readmem_dword, 8)
-    GLOBAL_VARIABLE(cpu_dword, 8)
-    GLOBAL_VARIABLE(cpu_word, 4)
-    GLOBAL_VARIABLE(cpu_hword, 2)
-    GLOBAL_VARIABLE(cpu_byte, 1)
-    GLOBAL_VARIABLE(FCR0, 4)
-    GLOBAL_VARIABLE(FCR31, 4)
-    GLOBAL_VARIABLE(reg, 256)
-    GLOBAL_VARIABLE(hi, 8)
-    GLOBAL_VARIABLE(lo, 8)
-    GLOBAL_VARIABLE(g_cp0_regs, 128)
-    GLOBAL_VARIABLE(reg_cop1_simple, 128)
-    GLOBAL_VARIABLE(reg_cop1_double, 128)
+    GLOBAL_VARIABLE(g_dev_mem_wdword, 8)
+    GLOBAL_VARIABLE(g_dev_mem_wword, 4)
+    GLOBAL_VARIABLE(g_dev_mem_whword, 2)
+    GLOBAL_VARIABLE(g_dev_mem_wbyte, 1)
+    GLOBAL_VARIABLE(g_dev_r4300_cp1_fcr0, 4)
+    GLOBAL_VARIABLE(g_dev_r4300_cp1_fcr31, 4)
+    GLOBAL_VARIABLE(g_dev_r4300_regs, 256)
+    GLOBAL_VARIABLE(g_dev_r4300_hi, 8)
+    GLOBAL_VARIABLE(g_dev_r4300_lo, 8)
+    GLOBAL_VARIABLE(g_dev_r4300_cp0_regs, 128)
+    GLOBAL_VARIABLE(g_dev_r4300_cp1_regs_simple, 128)
+    GLOBAL_VARIABLE(g_dev_r4300_cp1_regs_double, 128)
     GLOBAL_VARIABLE(rounding_modes, 16)
     GLOBAL_VARIABLE(branch_target, 4)
-    GLOBAL_VARIABLE(PC, 4)
+    GLOBAL_VARIABLE(g_dev_r4300_pc, 4)
     GLOBAL_VARIABLE(fake_pc, 132)
     GLOBAL_VARIABLE(ram_offset, 4)
     GLOBAL_VARIABLE(mini_ht, 256)
@@ -106,36 +106,36 @@ BSS_SECTION
 extra_memory:
     .space    33554432+64+4+4+4+4+4+4+4+4+8+8+4+2+2+4+4+256+8+8+128+128+128+16+4+4+132+4+256+512+4194304
 
-    dynarec_local     = extra_memory      + 33554432
-    next_interupt     = dynarec_local     + 64
-    cycle_count       = next_interupt     + 4
-    last_count        = cycle_count       + 4
-    pending_exception = last_count        + 4
-    pcaddr            = pending_exception + 4
-    stop              = pcaddr            + 4
-    invc_ptr          = stop              + 4
-    address           = invc_ptr          + 4
-    readmem_dword     = address           + 4
-    cpu_dword         = readmem_dword     + 8
-    cpu_word          = cpu_dword         + 8
-    cpu_hword         = cpu_word          + 4
-    cpu_byte          = cpu_hword         + 2 /* 1 byte free */
-    FCR0              = cpu_hword         + 4
-    FCR31             = FCR0              + 4
-    reg               = FCR31             + 4
-    hi                = reg               + 256
-    lo                = hi                + 8
-    g_cp0_regs        = lo                + 8
-    reg_cop1_simple   = g_cp0_regs        + 128
-    reg_cop1_double   = reg_cop1_simple   + 128
-    rounding_modes    = reg_cop1_double   + 128
-    branch_target     = rounding_modes    + 16
-    PC                = branch_target     + 4
-    fake_pc           = PC                + 4
-    ram_offset        = fake_pc           + 132
-    mini_ht           = ram_offset        + 4
-    restore_candidate = mini_ht           + 256
-    memory_map        = restore_candidate + 512
+    dynarec_local                   = extra_memory                      + 33554432
+    g_dev_r4300_cp0_next_interrupt  = dynarec_local                     + 64
+    cycle_count                     = g_dev_r4300_cp0_next_interrupt    + 4
+    last_count                      = cycle_count                       + 4
+    pending_exception               = last_count                        + 4
+    pcaddr                          = pending_exception                 + 4
+    g_dev_r4300_stop                = pcaddr                            + 4
+    invc_ptr                        = g_dev_r4300_stop                  + 4
+    g_dev_mem_address               = invc_ptr                          + 4
+    readmem_dword                   = g_dev_mem_address                 + 4
+    g_dev_mem_wdword                = readmem_dword                     + 8
+    g_dev_mem_wword                 = g_dev_mem_wdword                  + 8
+    g_dev_mem_whword                = g_dev_mem_wword                   + 4
+    g_dev_mem_wbyte                 = g_dev_mem_whword                  + 2 /* 1 byte free */
+    g_dev_r4300_cp1_fcr0            = g_dev_mem_whword                  + 4
+    g_dev_r4300_cp1_fcr31           = g_dev_r4300_cp1_fcr0              + 4
+    g_dev_r4300_regs                = g_dev_r4300_cp1_fcr31             + 4
+    g_dev_r4300_hi                  = g_dev_r4300_regs                  + 256
+    g_dev_r4300_lo                  = g_dev_r4300_hi                    + 8
+    g_dev_r4300_cp0_regs            = g_dev_r4300_lo                    + 8
+    g_dev_r4300_cp1_regs_simple     = g_dev_r4300_cp0_regs              + 128
+    g_dev_r4300_cp1_regs_double     = g_dev_r4300_cp1_regs_simple       + 128
+    rounding_modes                  = g_dev_r4300_cp1_regs_double       + 128
+    branch_target                   = rounding_modes                    + 16
+    g_dev_r4300_pc                  = branch_target                     + 4
+    fake_pc                         = g_dev_r4300_pc                    + 4
+    ram_offset                      = fake_pc                           + 132
+    mini_ht                         = ram_offset                        + 4
+    restore_candidate               = mini_ht                           + 256
+    memory_map                      = restore_candidate                 + 512
 
 END_SECTION
 
@@ -260,21 +260,21 @@ LOCAL_FUNCTION(exec_pagefault):
     /* r0 = instruction pointer */
     /* r1 = fault address */
     /* r2 = cause */
-    ldr    r3, [fp, #g_cp0_regs+48-dynarec_local] /* Status */
+    ldr    r3, [fp, #g_dev_r4300_cp0_regs+48-dynarec_local] /* Status */
     mvn    r6, #0xF000000F
-    ldr    r4, [fp, #g_cp0_regs+16-dynarec_local] /* Context */
+    ldr    r4, [fp, #g_dev_r4300_cp0_regs+16-dynarec_local] /* Context */
     bic    r6, r6, #0x0F800000
-    str    r0, [fp, #g_cp0_regs+56-dynarec_local] /* EPC */
+    str    r0, [fp, #g_dev_r4300_cp0_regs+56-dynarec_local] /* EPC */
     orr    r3, r3, #2
-    str    r1, [fp, #g_cp0_regs+32-dynarec_local] /* BadVAddr */
+    str    r1, [fp, #g_dev_r4300_cp0_regs+32-dynarec_local] /* BadVAddr */
     bic    r4, r4, r6
-    str    r3, [fp, #g_cp0_regs+48-dynarec_local] /* Status */
+    str    r3, [fp, #g_dev_r4300_cp0_regs+48-dynarec_local] /* Status */
     and    r5, r6, r1, lsr #9
-    str    r2, [fp, #g_cp0_regs+52-dynarec_local] /* Cause */
+    str    r2, [fp, #g_dev_r4300_cp0_regs+52-dynarec_local] /* Cause */
     and    r1, r1, r6, lsl #9
-    str    r1, [fp, #g_cp0_regs+40-dynarec_local] /* EntryHi */
+    str    r1, [fp, #g_dev_r4300_cp0_regs+40-dynarec_local] /* EntryHi */
     orr    r4, r4, r5
-    str    r4, [fp, #g_cp0_regs+16-dynarec_local] /* Context */
+    str    r4, [fp, #g_dev_r4300_cp0_regs+16-dynarec_local] /* Context */
     mov    r0, #0x80000000
     bl     get_addr_ht
     mov    pc, r0
@@ -532,7 +532,7 @@ GLOBAL_FUNCTION(cc_interrupt):
     str    r1, [fp, #pending_exception-dynarec_local]
     and    r2, r2, r10, lsr #19
     add    r3, fp, #restore_candidate-dynarec_local
-    str    r10, [fp, #g_cp0_regs+36-dynarec_local] /* Count */
+    str    r10, [fp, #g_dev_r4300_cp0_regs+36-dynarec_local] /* Count */
     ldr    r4, [r2, r3]
     mov    r10, lr
     tst    r4, r4
@@ -540,10 +540,10 @@ GLOBAL_FUNCTION(cc_interrupt):
 .E1:
     bl     gen_interupt
     mov    lr, r10
-    ldr    r10, [fp, #g_cp0_regs+36-dynarec_local] /* Count */
-    ldr    r0, [fp, #next_interupt-dynarec_local]
+    ldr    r10, [fp, #g_dev_r4300_cp0_regs+36-dynarec_local] /* Count */
+    ldr    r0, [fp, #g_dev_r4300_cp0_next_interrupt-dynarec_local]
     ldr    r1, [fp, #pending_exception-dynarec_local]
-    ldr    r2, [fp, #stop-dynarec_local]
+    ldr    r2, [fp, #g_dev_r4300_stop-dynarec_local]
     str    r0, [fp, #last_count-dynarec_local]
     sub    r10, r10, r0
     tst    r2, r2
@@ -574,8 +574,8 @@ GLOBAL_FUNCTION(cc_interrupt):
 GLOBAL_FUNCTION(do_interrupt):
     ldr    r0, [fp, #pcaddr-dynarec_local]
     bl     get_addr_ht
-    ldr    r1, [fp, #next_interupt-dynarec_local]
-    ldr    r10, [fp, #g_cp0_regs+36-dynarec_local] /* Count */
+    ldr    r1, [fp, #g_dev_r4300_cp0_next_interrupt-dynarec_local]
+    ldr    r10, [fp, #g_dev_r4300_cp0_regs+36-dynarec_local] /* Count */
     str    r1, [fp, #last_count-dynarec_local]
     sub    r10, r10, r1
     add    r10, r10, #2
@@ -584,13 +584,13 @@ GLOBAL_FUNCTION(do_interrupt):
 GLOBAL_FUNCTION(fp_exception):
     mov    r2, #0x10000000
 .E7:
-    ldr    r1, [fp, #g_cp0_regs+48-dynarec_local] /* Status */
+    ldr    r1, [fp, #g_dev_r4300_cp0_regs+48-dynarec_local] /* Status */
     mov    r3, #0x80000000
-    str    r0, [fp, #g_cp0_regs+56-dynarec_local] /* EPC */
+    str    r0, [fp, #g_dev_r4300_cp0_regs+56-dynarec_local] /* EPC */
     orr    r1, #2
     add    r2, r2, #0x2c
-    str    r1, [fp, #g_cp0_regs+48-dynarec_local] /* Status */
-    str    r2, [fp, #g_cp0_regs+52-dynarec_local] /* Cause */
+    str    r1, [fp, #g_dev_r4300_cp0_regs+48-dynarec_local] /* Status */
+    str    r2, [fp, #g_dev_r4300_cp0_regs+52-dynarec_local] /* Cause */
     add    r0, r3, #0x180
     bl     get_addr_ht
     mov    pc, r0
@@ -600,13 +600,13 @@ GLOBAL_FUNCTION(fp_exception_ds):
     b      .E7
 
 GLOBAL_FUNCTION(jump_syscall):
-    ldr    r1, [fp, #g_cp0_regs+48-dynarec_local] /* Status */
+    ldr    r1, [fp, #g_dev_r4300_cp0_regs+48-dynarec_local] /* Status */
     mov    r3, #0x80000000
-    str    r0, [fp, #g_cp0_regs+56-dynarec_local] /* EPC */
+    str    r0, [fp, #g_dev_r4300_cp0_regs+56-dynarec_local] /* EPC */
     orr    r1, #2
     mov    r2, #0x20
-    str    r1, [fp, #g_cp0_regs+48-dynarec_local] /* Status */
-    str    r2, [fp, #g_cp0_regs+52-dynarec_local] /* Cause */
+    str    r1, [fp, #g_dev_r4300_cp0_regs+48-dynarec_local] /* Status */
+    str    r2, [fp, #g_dev_r4300_cp0_regs+52-dynarec_local] /* Cause */
     add    r0, r3, #0x180
     bl     get_addr_ht
     mov    pc, r0
@@ -617,24 +617,24 @@ GLOBAL_FUNCTION(indirect_jump_indexed):
 GLOBAL_FUNCTION(indirect_jump):
     ldr    r12, [fp, #last_count-dynarec_local]
     add    r2, r2, r12 
-    str    r2, [fp, #g_cp0_regs+36-dynarec_local] /* Count */
+    str    r2, [fp, #g_dev_r4300_cp0_regs+36-dynarec_local] /* Count */
     mov    pc, r0
 
 GLOBAL_FUNCTION(jump_eret):
-    ldr    r1, [fp, #g_cp0_regs+48-dynarec_local] /* Status */
+    ldr    r1, [fp, #g_dev_r4300_cp0_regs+48-dynarec_local] /* Status */
     ldr    r0, [fp, #last_count-dynarec_local]
     bic    r1, r1, #2
     add    r10, r0, r10
-    str    r1, [fp, #g_cp0_regs+48-dynarec_local] /* Status */
-    str    r10, [fp, #g_cp0_regs+36-dynarec_local] /* Count */
+    str    r1, [fp, #g_dev_r4300_cp0_regs+48-dynarec_local] /* Status */
+    str    r10, [fp, #g_dev_r4300_cp0_regs+36-dynarec_local] /* Count */
     bl     check_interupt
-    ldr    r1, [fp, #next_interupt-dynarec_local]
-    ldr    r0, [fp, #g_cp0_regs+56-dynarec_local] /* EPC */
+    ldr    r1, [fp, #g_dev_r4300_cp0_next_interrupt-dynarec_local]
+    ldr    r0, [fp, #g_dev_r4300_cp0_regs+56-dynarec_local] /* EPC */
     str    r1, [fp, #last_count-dynarec_local]
     subs   r10, r10, r1
     bpl    .E11
 .E8:
-    add    r6, fp, #reg+256-dynarec_local
+    add    r6, fp, #g_dev_r4300_regs+256-dynarec_local
     mov    r5, #248
     mov    r1, #0
 .E9:
@@ -645,11 +645,11 @@ GLOBAL_FUNCTION(jump_eret):
     adc    r1, r1, r1
     subs   r5, r5, #8
     bne    .E9
-    ldr    r2, [fp, #hi-dynarec_local]
-    ldr    r3, [fp, #hi+4-dynarec_local]
+    ldr    r2, [fp, #g_dev_r4300_hi-dynarec_local]
+    ldr    r3, [fp, #g_dev_r4300_hi+4-dynarec_local]
     eors   r3, r3, r2, asr #31
-    ldr    r2, [fp, #lo-dynarec_local]
-    ldreq  r3, [fp, #lo+4-dynarec_local]
+    ldr    r2, [fp, #g_dev_r4300_lo-dynarec_local]
+    ldreq  r3, [fp, #g_dev_r4300_lo+4-dynarec_local]
     eoreq  r3, r3, r2, asr #31
     subs   r3, r3, #1
     adc    r1, r1, r1
@@ -674,8 +674,8 @@ GLOBAL_FUNCTION(new_dyna_start):
     ldr    r4, [r1]
     add    r0, r0, #0x40
     bl     new_recompile_block
-    ldr    r0, [fp, #next_interupt-dynarec_local]
-    ldr    r10, [fp, #g_cp0_regs+36-dynarec_local] /* Count */
+    ldr    r0, [fp, #g_dev_r4300_cp0_next_interrupt-dynarec_local]
+    ldr    r10, [fp, #g_dev_r4300_cp0_regs+36-dynarec_local] /* Count */
     str    r0, [fp, #last_count-dynarec_local]
     sub    r10, r10, r0
     mov    pc, r4
@@ -745,23 +745,23 @@ LOCAL_FUNCTION(invalidate_addr_call):
 
 GLOBAL_FUNCTION(write_rdram_new):
     ldr    r3, [fp, #ram_offset-dynarec_local]
-    ldr    r2, [fp, #address-dynarec_local]
-    ldr    r0, [fp, #cpu_word-dynarec_local]
+    ldr    r2, [fp, #g_dev_mem_address-dynarec_local]
+    ldr    r0, [fp, #g_dev_mem_wword-dynarec_local]
     str    r0, [r2, r3, lsl #2]
     b      .E12
 
 GLOBAL_FUNCTION(write_rdramb_new):
     ldr    r3, [fp, #ram_offset-dynarec_local]
-    ldr    r2, [fp, #address-dynarec_local]
-    ldrb   r0, [fp, #cpu_byte-dynarec_local]
+    ldr    r2, [fp, #g_dev_mem_address-dynarec_local]
+    ldrb   r0, [fp, #g_dev_mem_wbyte-dynarec_local]
     eor    r2, r2, #3
     strb   r0, [r2, r3, lsl #2]
     b      .E12
 
 GLOBAL_FUNCTION(write_rdramh_new):
     ldr    r3, [fp, #ram_offset-dynarec_local]
-    ldr    r2, [fp, #address-dynarec_local]
-    ldrh   r0, [fp, #cpu_hword-dynarec_local]
+    ldr    r2, [fp, #g_dev_mem_address-dynarec_local]
+    ldrh   r0, [fp, #g_dev_mem_whword-dynarec_local]
     eor    r2, r2, #2
     lsl    r3, r3, #2
     strh   r0, [r2, r3]
@@ -769,17 +769,17 @@ GLOBAL_FUNCTION(write_rdramh_new):
 
 GLOBAL_FUNCTION(write_rdramd_new):
     ldr    r3, [fp, #ram_offset-dynarec_local]
-    ldr    r2, [fp, #address-dynarec_local]
-/*    ldrd    r0, [fp, #cpu_dword-dynarec_local]*/
-    ldr    r0, [fp, #cpu_dword-dynarec_local]
-    ldr    r1, [fp, #cpu_dword+4-dynarec_local]
+    ldr    r2, [fp, #g_dev_mem_address-dynarec_local]
+/*    ldrd    r0, [fp, #g_dev_mem_wdword-dynarec_local]*/
+    ldr    r0, [fp, #g_dev_mem_wdword-dynarec_local]
+    ldr    r1, [fp, #g_dev_mem_wdword+4-dynarec_local]
     add    r3, r2, r3, lsl #2
     str    r0, [r3, #4]
     str    r1, [r3]
     b      .E12
 
 LOCAL_FUNCTION(do_invalidate):
-    ldr    r2, [fp, #address-dynarec_local]
+    ldr    r2, [fp, #g_dev_mem_address-dynarec_local]
 .E12:
     ldr    r1, [fp, #invc_ptr-dynarec_local]
     lsr    r0, r2, #12
@@ -789,56 +789,56 @@ LOCAL_FUNCTION(do_invalidate):
     mov    pc, lr
 
 GLOBAL_FUNCTION(read_nomem_new):
-    ldr    r2, [fp, #address-dynarec_local]
+    ldr    r1, [fp, #g_dev_mem_address-dynarec_local]
     add    r12, fp, #memory_map-dynarec_local
-    lsr    r0, r2, #12
+    lsr    r0, r1, #12
     ldr    r12, [r12, r0, lsl #2]
-    mov    r1, #8
+    mov    r2, #0
     tst    r12, r12
     bmi    tlb_exception
-    ldr    r0, [r2, r12, lsl #2]
+    ldr    r0, [r1, r12, lsl #2]
     str    r0, [fp, #readmem_dword-dynarec_local]
     mov    pc, lr
 
 GLOBAL_FUNCTION(read_nomemb_new):
-    ldr    r2, [fp, #address-dynarec_local]
+    ldr    r1, [fp, #g_dev_mem_address-dynarec_local]
     add    r12, fp, #memory_map-dynarec_local
-    lsr    r0, r2, #12
+    lsr    r0, r1, #12
     ldr    r12, [r12, r0, lsl #2]
-    mov    r1, #8
+    mov    r2, #0
     tst    r12, r12
     bmi    tlb_exception
-    eor    r2, r2, #3
-    ldrb   r0, [r2, r12, lsl #2]
+    eor    r1, r1, #3
+    ldrb   r0, [r1, r12, lsl #2]
     str    r0, [fp, #readmem_dword-dynarec_local]
     mov    pc, lr
 
 GLOBAL_FUNCTION(read_nomemh_new):
-    ldr    r2, [fp, #address-dynarec_local]
+    ldr    r1, [fp, #g_dev_mem_address-dynarec_local]
     add    r12, fp, #memory_map-dynarec_local
-    lsr    r0, r2, #12
+    lsr    r0, r1, #12
     ldr    r12, [r12, r0, lsl #2]
-    mov    r1, #8
+    mov    r2, #0
     tst    r12, r12
     bmi    tlb_exception
     lsl    r12, r12, #2
-    eor    r2, r2, #2
-    ldrh   r0, [r2, r12]
+    eor    r1, r1, #2
+    ldrh   r0, [r1, r12]
     str    r0, [fp, #readmem_dword-dynarec_local]
     mov    pc, lr
 
 GLOBAL_FUNCTION(read_nomemd_new):
-    ldr    r2, [fp, #address-dynarec_local]
+    ldr    r1, [fp, #g_dev_mem_address-dynarec_local]
     add    r12, fp, #memory_map-dynarec_local
-    lsr    r0, r2, #12
+    lsr    r0, r1, #12
     ldr    r12, [r12, r0, lsl #2]
-    mov    r1, #8
+    mov    r2, #0
     tst    r12, r12
     bmi    tlb_exception
     lsl    r12, r12, #2
-/*    ldrd    r0, [r2, r12]*/
-    add    r3, r2, #4
-    ldr    r0, [r2, r12]
+/*    ldrd    r0, [r1, r12]*/
+    add    r3, r1, #4
+    ldr    r0, [r1, r12]
     ldr    r1, [r3, r12]
     str    r0, [fp, #readmem_dword+4-dynarec_local]
     str    r1, [fp, #readmem_dword-dynarec_local]
@@ -848,124 +848,180 @@ GLOBAL_FUNCTION(write_nomem_new):
     str    r3, [fp, #24]
     str    lr, [fp, #28]
     bl     do_invalidate
-    ldr    r2, [fp, #address-dynarec_local]
+    ldr    r1, [fp, #g_dev_mem_address-dynarec_local]
     add    r12, fp, #memory_map-dynarec_local
     ldr    lr, [fp, #28]
-    lsr    r0, r2, #12
+    lsr    r0, r1, #12
     ldr    r3, [fp, #24]
     ldr    r12, [r12, r0, lsl #2]
-    mov    r1, #0xc
+    mov    r2, #1
     tst    r12, #0x40000000
     bne    tlb_exception
-    ldr    r0, [fp, #cpu_word-dynarec_local]
-    str    r0, [r2, r12, lsl #2]
+    ldr    r0, [fp, #g_dev_mem_wword-dynarec_local]
+    str    r0, [r1, r12, lsl #2]
     mov    pc, lr
 
 GLOBAL_FUNCTION(write_nomemb_new):
     str    r3, [fp, #24]
     str    lr, [fp, #28]
     bl     do_invalidate
-    ldr    r2, [fp, #address-dynarec_local]
+    ldr    r1, [fp, #g_dev_mem_address-dynarec_local]
     add    r12, fp, #memory_map-dynarec_local
     ldr    lr, [fp, #28]
-    lsr    r0, r2, #12
+    lsr    r0, r1, #12
     ldr    r3, [fp, #24]
     ldr    r12, [r12, r0, lsl #2]
-    mov    r1, #0xc
+    mov    r2, #1
     tst    r12, #0x40000000
     bne    tlb_exception
-    eor    r2, r2, #3
-    ldrb   r0, [fp, #cpu_byte-dynarec_local]
-    strb   r0, [r2, r12, lsl #2]
+    eor    r1, r1, #3
+    ldrb   r0, [fp, #g_dev_mem_wbyte-dynarec_local]
+    strb   r0, [r1, r12, lsl #2]
     mov    pc, lr
 
 GLOBAL_FUNCTION(write_nomemh_new):
     str    r3, [fp, #24]
     str    lr, [fp, #28]
     bl     do_invalidate
-    ldr    r2, [fp, #address-dynarec_local]
+    ldr    r1, [fp, #g_dev_mem_address-dynarec_local]
     add    r12, fp, #memory_map-dynarec_local
     ldr    lr, [fp, #28]
-    lsr    r0, r2, #12
+    lsr    r0, r1, #12
     ldr    r3, [fp, #24]
     ldr    r12, [r12, r0, lsl #2]
-    mov    r1, #0xc
+    mov    r2, #1
     lsls   r12, #2
     bcs    tlb_exception
-    eor    r2, r2, #2
-    ldrh   r0, [fp, #cpu_hword-dynarec_local]
-    strh   r0, [r2, r12]
+    eor    r1, r1, #2
+    ldrh   r0, [fp, #g_dev_mem_whword-dynarec_local]
+    strh   r0, [r1, r12]
     mov    pc, lr
 
 GLOBAL_FUNCTION(write_nomemd_new):
     str    r3, [fp, #24]
     str    lr, [fp, #28]
     bl     do_invalidate
-    ldr    r2, [fp, #address-dynarec_local]
+    ldr    r1, [fp, #g_dev_mem_address-dynarec_local]
     add    r12, fp, #memory_map-dynarec_local
     ldr    lr, [fp, #28]
-    lsr    r0, r2, #12
+    lsr    r0, r1, #12
     ldr    r3, [fp, #24]
     ldr    r12, [r12, r0, lsl #2]
-    mov    r1, #0xc
+    mov    r2, #1
     lsls   r12, #2
     bcs    tlb_exception
-    add    r3, r2, #4
-    ldr    r0, [fp, #cpu_dword+4-dynarec_local]
-    ldr    r1, [fp, #cpu_dword-dynarec_local]
-/*    strd    r0, [r2, r12]*/
-    str    r0, [r2, r12]
+    add    r3, r1, #4
+    ldr    r0, [fp, #g_dev_mem_wdword+4-dynarec_local]
+    ldr    r1, [fp, #g_dev_mem_wdword-dynarec_local]
+/*    strd    r0, [r1, r12]*/
+    str    r0, [r1, r12]
     str    r1, [r3, r12]
     mov    pc, lr
+    
+GLOBAL_FUNCTION(write_mi_new):
+    str    r3, [fp, #24]
+    str    lr, [fp, #28]
+    add    r3, #4
+    str    r3, [fp, #pcaddr-dynarec_local]
+    mov    r1, #0
+    str    r1, [fp, #pending_exception-dynarec_local]
+    bl     write_mi
+    ldr    lr, [fp, #28]
+    ldr    r3, [fp, #24]
+    ldr    r1, [fp, #pending_exception-dynarec_local]
+    tst    r1, r1
+    bne    mi_exception
+    mov    pc, lr
+    
+GLOBAL_FUNCTION(write_mib_new):
+    str    r3, [fp, #24]
+    str    lr, [fp, #28]
+    add    r3, #4
+    str    r3, [fp, #pcaddr-dynarec_local]
+    mov    r1, #0
+    str    r1, [fp, #pending_exception-dynarec_local]
+    bl     write_mib
+    ldr    lr, [fp, #28]
+    ldr    r3, [fp, #24]
+    ldr    r1, [fp, #pending_exception-dynarec_local]
+    tst    r1, r1
+    bne    mi_exception
+    mov    pc, lr
+    
+GLOBAL_FUNCTION(write_mih_new):
+    str    r3, [fp, #24]
+    str    lr, [fp, #28]
+    add    r3, #4
+    str    r3, [fp, #pcaddr-dynarec_local]
+    mov    r1, #0
+    str    r1, [fp, #pending_exception-dynarec_local]
+    bl     write_mih
+    ldr    lr, [fp, #28]
+    ldr    r3, [fp, #24]
+    ldr    r1, [fp, #pending_exception-dynarec_local]
+    tst    r1, r1
+    bne    mi_exception
+    mov    pc, lr
+    
+GLOBAL_FUNCTION(write_mid_new):
+    str    r3, [fp, #24]
+    str    lr, [fp, #28]
+    add    r3, #4
+    str    r3, [fp, #pcaddr-dynarec_local]
+    mov    r1, #0
+    str    r1, [fp, #pending_exception-dynarec_local]
+    bl     write_mid
+    ldr    lr, [fp, #28]
+    ldr    r3, [fp, #24]
+    ldr    r1, [fp, #pending_exception-dynarec_local]
+    tst    r1, r1
+    bne    mi_exception
+    mov    pc, lr
+    
+LOCAL_FUNCTION(mi_exception):
+    /* r1 = mem addr */
+    /* r3 = instr addr/flags */
+    ldr    r1, [fp, #g_dev_mem_address-dynarec_local]
+    bl     wb_base_reg
+    b      do_interrupt
 
 LOCAL_FUNCTION(tlb_exception):
-    /* r1 = cause */
-    /* r2 = address */
+    /* r1 = mem addr */
+    /* r2 = r/w */
     /* r3 = instr addr/flags */
-    ldr    r4, [fp, #g_cp0_regs+48-dynarec_local] /* Status */
-    add    r5, fp, #memory_map-dynarec_local
-    lsr    r6, r3, #12
-    orr    r1, r1, r3, lsl #31
-    orr    r4, r4, #2
-    ldr    r7, [r5, r6, lsl #2]
-    bic    r8, r3, #3
-    str    r4, [fp, #g_cp0_regs+48-dynarec_local] /* Status */
-    mov    r6, #0x6000000
-    str    r1, [fp, #g_cp0_regs+52-dynarec_local] /* Cause */
-    orr    r6, r6, #0x22
-    ldr    r0, [r8, r7, lsl #2]
-    add    r4, r8, r1, asr #29
-    add    r5, fp, #reg-dynarec_local
-    str    r4, [fp, #g_cp0_regs+56-dynarec_local] /* EPC */
-    mov    r7, #0xf8
-    ldr    r8, [fp, #g_cp0_regs+16-dynarec_local] /* Context */
-    lsl    r1, r0, #16
-    lsr    r4, r0,    #26
-    and    r7, r7, r0, lsr #18
-    mvn    r9, #0xF000000F
-    sub    r2, r2, r1, asr #16
-    bic    r9, r9, #0x0F800000
-    rors   r6, r6, r4
-    mov    r0, #0x80000000
-    ldrcs  r2, [r5, r7]
-    bic    r8, r8, r9
-    tst    r3, #2
-    str    r2, [r5, r7]
-    add    r4, r2, r1, asr #16
-    add    r6, fp, #reg+4-dynarec_local
-    asr    r3, r2, #31
-    str    r4, [fp, #g_cp0_regs+32-dynarec_local] /* BadVAddr */
-    add    r0, r0, #0x180
-    and    r4, r9, r4, lsr #9
-    strne  r3, [r6, r7]
-    orr    r8, r8, r4
-    str    r8, [fp, #g_cp0_regs+16-dynarec_local] /* Context */
-    bl     get_addr_ht
-    ldr    r1, [fp, #next_interupt-dynarec_local]
-    ldr    r10, [fp, #g_cp0_regs+36-dynarec_local] /* Count */
+    bl     wb_base_reg
+    mov    r0, r3
+    bl     TLB_refill_exception_new
+    ldr    r1, [fp, #g_dev_r4300_cp0_next_interrupt-dynarec_local]
+    ldr    r10, [fp, #g_dev_r4300_cp0_regs+36-dynarec_local] /* Count */
     str    r1, [fp, #last_count-dynarec_local]
     sub    r10, r10, r1
-    mov    pc, r0    
+    mov    pc, r0
+    
+LOCAL_FUNCTION(wb_base_reg):
+    /* r1 = mem addr */
+    /* r3 = instr addr/flags */
+    add    r5, fp, #memory_map-dynarec_local
+    lsr    r6, r3, #12
+    ldr    r7, [r5, r6, lsl #2]
+    bic    r8, r3, #3
+    mov    r6, #0x6000000
+    orr    r6, r6, #0x22
+    ldr    r0, [r8, r7, lsl #2]
+    add    r5, fp, #g_dev_r4300_regs-dynarec_local
+    mov    r7, #0xf8
+    lsl    r8, r0, #16
+    lsr    r4, r0, #26
+    and    r7, r7, r0, lsr #18
+    sub    r9, r1, r8, asr #16
+    rors   r6, r6, r4
+    ldrcs  r9, [r5, r7]
+    tst    r3, #2
+    str    r9, [r5, r7]
+    add    r6, fp, #g_dev_r4300_regs+4-dynarec_local
+    asr    r5, r9, #31
+    strne  r5, [r6, r7]
+    mov    pc, lr
 
 GLOBAL_FUNCTION(breakpoint):
     /* Set breakpoint here for debugging */

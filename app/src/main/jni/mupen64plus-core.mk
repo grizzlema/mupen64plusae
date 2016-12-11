@@ -118,14 +118,6 @@ ifeq ($(TARGET_ARCH_ABI), armeabi-v7a)
     LOCAL_CFLAGS += -mfloat-abi=softfp
     LOCAL_CFLAGS += -mfpu=vfp
 
-else ifeq ($(TARGET_ARCH_ABI), armeabi)
-    # Use for pre-ARM7a:
-    LOCAL_SRC_FILES += $(SRCDIR)/r4300/new_dynarec/arm/linkage_arm.S
-    LOCAL_SRC_FILES += $(SRCDIR)/r4300/new_dynarec/arm/arm_cpu_features.c
-    LOCAL_CFLAGS += -DARMv5_ONLY
-    LOCAL_CFLAGS += -DDYNAREC
-    LOCAL_CFLAGS += -DNEW_DYNAREC=3
-
 else ifeq ($(TARGET_ARCH_ABI), x86)
     # Use for x86:
     LOCAL_ASMFLAGS = -d ELF_TYPE

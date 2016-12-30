@@ -328,11 +328,12 @@ endif
 # set base program pointers and flags
 CC        = $(CROSS_COMPILE)gcc
 CXX       = $(CROSS_COMPILE)g++
+OBJDUMP   = $(CROSS_COMPILE)objdump
 AS        = nasm
 RM       ?= rm -f
 INSTALL  ?= install
-MKDIR ?= mkdir -p
-GENS.c = $(Q_CC)$(CC) $(CFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -S
+MKDIR    ?= mkdir -p
+AWK      ?= awk
 COMPILE.c = $(Q_CC)$(CC) $(CFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c
 COMPILE.cc = $(Q_CXX)$(CXX) $(CXXFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c
 COMPILE.as = $(Q_AS)$(AS) $(ASFLAGS)
@@ -666,13 +667,21 @@ CXXFLAGS += $(CFLAGS)
 $(SRCDIR)/r4300/new_dynarec/x86/linkage_x86.asm: $(SRCDIR)/main/asm_defines_nasm.h
 $(SRCDIR)/r4300/new_dynarec/arm/linkage_arm.S: $(SRCDIR)/main/asm_defines_gas.h
 
-# Generate defines for nasm
-$(SRCDIR)/main/asm_defines_nasm.h: $(SRCDIR)/main/asm_defines.c
-	$(GENS.c) -fno-lto $< -o - | awk '($$1 == "->") { print "%define " $$2 "_" $$3 " " substr($$4,2) }' > $@
 
-# Generate defines for gas
-$(SRCDIR)/main/asm_defines_gas.h: $(SRCDIR)/main/asm_defines.c
-	$(GENS.c) -fno-lto $< -o - | awk '($$1 == "->") { print "#define " $$2 "_" $$3 " " substr($$4,2) }' > $@
+ASM_DEFINES = $(OBJDIR)/main/asm_defines.o
+
+# It is important to disable LTO for this object file
+# otherwise we can't extract usefull information from it.
+$(ASM_DEFINES): $(SRCDIR)/main/asm_defines.c
+	$(COMPILE.c) -fno-lto -o $@ $<
+
+# Generate defines for nasm by parsing global symbols
+$(SRCDIR)/main/asm_defines_nasm.h: $(ASM_DEFINES)
+	$(OBJDUMP) -t $< | $(AWK) '/offsetof_struct/ { print "%define " $$6 " (0x"$$1"-1)" }' > $@
+
+# Generate defines for gas by parsing global symbols
+$(SRCDIR)/main/asm_defines_gas.h: $(ASM_DEFINES)
+	$(OBJDUMP) -t $< | $(AWK) '/offsetof_struct/ { print "#define " $$6 " (0x"$$1"-1)" }' > $@
 
 # standard build rules
 $(OBJDIR)/%.o: $(SRCDIR)/%.asm

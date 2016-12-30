@@ -1,0 +1,93 @@
+
+asm_defines_arm.o:     file format elf32-littlearm
+
+SYMBOL TABLE:
+00000000 l    df *ABS*	00000000 asm_defines.c
+00000000 l    d  .text	00000000 .text
+00000000 l    d  .data	00000000 .data
+00000000 l    d  .bss	00000000 .bss
+00000000 l    d  .text._ZL6ai_regj	00000000 .text._ZL6ai_regj
+00000000 l     F .text._ZL6ai_regj	00000020 ai_reg(unsigned int)
+00000000 l    d  .ARM.extab.text._ZL6ai_regj	00000000 .ARM.extab.text._ZL6ai_regj
+00000000 l    d  .ARM.exidx.text._ZL6ai_regj	00000000 .ARM.exidx.text._ZL6ai_regj
+00000000 l    d  .text._ZL12masked_writePjjj	00000000 .text._ZL12masked_writePjjj
+00000000 l     F .text._ZL12masked_writePjjj	00000044 masked_write(unsigned int*, unsigned int, unsigned int)
+00000000 l    d  .ARM.extab.text._ZL12masked_writePjjj	00000000 .ARM.extab.text._ZL12masked_writePjjj
+00000000 l    d  .ARM.exidx.text._ZL12masked_writePjjj	00000000 .ARM.exidx.text._ZL12masked_writePjjj
+00000000 l    d  .text._ZL11rom_addressj	00000000 .text._ZL11rom_addressj
+00000000 l     F .text._ZL11rom_addressj	0000001c rom_address(unsigned int)
+00000000 l    d  .ARM.extab.text._ZL11rom_addressj	00000000 .ARM.extab.text._ZL11rom_addressj
+00000000 l    d  .ARM.exidx.text._ZL11rom_addressj	00000000 .ARM.exidx.text._ZL11rom_addressj
+00000000 l    d  .text._ZL6pi_regj	00000000 .text._ZL6pi_regj
+00000000 l     F .text._ZL6pi_regj	00000020 pi_reg(unsigned int)
+00000000 l    d  .ARM.extab.text._ZL6pi_regj	00000000 .ARM.extab.text._ZL6pi_regj
+00000000 l    d  .ARM.exidx.text._ZL6pi_regj	00000000 .ARM.exidx.text._ZL6pi_regj
+00000000 l    d  .text._ZL6mi_regj	00000000 .text._ZL6mi_regj
+00000000 l     F .text._ZL6mi_regj	00000020 mi_reg(unsigned int)
+00000000 l    d  .ARM.extab.text._ZL6mi_regj	00000000 .ARM.extab.text._ZL6mi_regj
+00000000 l    d  .ARM.exidx.text._ZL6mi_regj	00000000 .ARM.exidx.text._ZL6mi_regj
+00000000 l    d  .text._ZL7dpc_regj	00000000 .text._ZL7dpc_regj
+00000000 l     F .text._ZL7dpc_regj	00000020 dpc_reg(unsigned int)
+00000000 l    d  .ARM.extab.text._ZL7dpc_regj	00000000 .ARM.extab.text._ZL7dpc_regj
+00000000 l    d  .ARM.exidx.text._ZL7dpc_regj	00000000 .ARM.exidx.text._ZL7dpc_regj
+00000000 l    d  .text._ZL7dps_regj	00000000 .text._ZL7dps_regj
+00000000 l     F .text._ZL7dps_regj	00000020 dps_reg(unsigned int)
+00000000 l    d  .ARM.extab.text._ZL7dps_regj	00000000 .ARM.extab.text._ZL7dps_regj
+00000000 l    d  .ARM.exidx.text._ZL7dps_regj	00000000 .ARM.exidx.text._ZL7dps_regj
+00000000 l    d  .text._ZL9rdram_regj	00000000 .text._ZL9rdram_regj
+00000000 l     F .text._ZL9rdram_regj	00000020 rdram_reg(unsigned int)
+00000000 l    d  .ARM.extab.text._ZL9rdram_regj	00000000 .ARM.extab.text._ZL9rdram_regj
+00000000 l    d  .ARM.exidx.text._ZL9rdram_regj	00000000 .ARM.exidx.text._ZL9rdram_regj
+00000000 l    d  .text._ZL18rdram_dram_addressj	00000000 .text._ZL18rdram_dram_addressj
+00000000 l     F .text._ZL18rdram_dram_addressj	00000020 rdram_dram_address(unsigned int)
+00000000 l    d  .ARM.extab.text._ZL18rdram_dram_addressj	00000000 .ARM.extab.text._ZL18rdram_dram_addressj
+00000000 l    d  .ARM.exidx.text._ZL18rdram_dram_addressj	00000000 .ARM.exidx.text._ZL18rdram_dram_addressj
+00000000 l    d  .text._ZL6ri_regj	00000000 .text._ZL6ri_regj
+00000000 l     F .text._ZL6ri_regj	00000020 ri_reg(unsigned int)
+00000000 l    d  .ARM.extab.text._ZL6ri_regj	00000000 .ARM.extab.text._ZL6ri_regj
+00000000 l    d  .ARM.exidx.text._ZL6ri_regj	00000000 .ARM.exidx.text._ZL6ri_regj
+00000000 l    d  .text._ZL15rsp_mem_addressj	00000000 .text._ZL15rsp_mem_addressj
+00000000 l     F .text._ZL15rsp_mem_addressj	00000020 rsp_mem_address(unsigned int)
+00000000 l    d  .ARM.extab.text._ZL15rsp_mem_addressj	00000000 .ARM.extab.text._ZL15rsp_mem_addressj
+00000000 l    d  .ARM.exidx.text._ZL15rsp_mem_addressj	00000000 .ARM.exidx.text._ZL15rsp_mem_addressj
+00000000 l    d  .text._ZL7rsp_regj	00000000 .text._ZL7rsp_regj
+00000000 l     F .text._ZL7rsp_regj	00000020 rsp_reg(unsigned int)
+00000000 l    d  .ARM.extab.text._ZL7rsp_regj	00000000 .ARM.extab.text._ZL7rsp_regj
+00000000 l    d  .ARM.exidx.text._ZL7rsp_regj	00000000 .ARM.exidx.text._ZL7rsp_regj
+00000000 l    d  .text._ZL8rsp_reg2j	00000000 .text._ZL8rsp_reg2j
+00000000 l     F .text._ZL8rsp_reg2j	00000020 rsp_reg2(unsigned int)
+00000000 l    d  .ARM.extab.text._ZL8rsp_reg2j	00000000 .ARM.extab.text._ZL8rsp_reg2j
+00000000 l    d  .ARM.exidx.text._ZL8rsp_reg2j	00000000 .ARM.exidx.text._ZL8rsp_reg2j
+00000000 l    d  .text._ZL15pif_ram_addressj	00000000 .text._ZL15pif_ram_addressj
+00000000 l     F .text._ZL15pif_ram_addressj	00000024 pif_ram_address(unsigned int)
+00000000 l    d  .ARM.extab.text._ZL15pif_ram_addressj	00000000 .ARM.extab.text._ZL15pif_ram_addressj
+00000000 l    d  .ARM.exidx.text._ZL15pif_ram_addressj	00000000 .ARM.exidx.text._ZL15pif_ram_addressj
+00000000 l    d  .text._ZL6si_regj	00000000 .text._ZL6si_regj
+00000000 l     F .text._ZL6si_regj	00000020 si_reg(unsigned int)
+00000000 l    d  .ARM.extab.text._ZL6si_regj	00000000 .ARM.extab.text._ZL6si_regj
+00000000 l    d  .ARM.exidx.text._ZL6si_regj	00000000 .ARM.exidx.text._ZL6si_regj
+00000000 l    d  .text._ZL6vi_regj	00000000 .text._ZL6vi_regj
+00000000 l     F .text._ZL6vi_regj	00000020 vi_reg(unsigned int)
+00000000 l    d  .ARM.extab.text._ZL6vi_regj	00000000 .ARM.extab.text._ZL6vi_regj
+00000000 l    d  .ARM.exidx.text._ZL6vi_regj	00000000 .ARM.exidx.text._ZL6vi_regj
+00000000 l     O .bss	00000001 offsetof_struct_device_r4300
+00000004 l     O .bss	000004b9 offsetof_struct_r4300_core_return_address
+000004c0 l     O .bss	00500609 offsetof_struct_r4300_core_cp0
+00500acc l     O .bss	00000111 offsetof_struct_cp0_last_addr
+00500be0 l     O .bss	00000115 offsetof_struct_cp0_count_per_op
+00500cf8 l     O .bss	00000119 offsetof_struct_cp0_tlb
+00500e14 l     O .bss	00000001 offsetof_struct_tlb_entries
+00500e18 l     O .bss	00000681 offsetof_struct_tlb_LUT_r
+0050149c l     O .bss	00400681 offsetof_struct_tlb_LUT_w
+00901b20 l     O .bss	00000541 offsetof_struct_r4300_core_cached_interp
+00902064 l     O .bss	00000001 offsetof_struct_cached_interp_invalid_code
+00902068 l     O .bss	00d039b5 offsetof_struct_device_mem
+01605a20 l     O .bss	00d03849 offsetof_struct_device_ri
+0230926c l     O .bss	00000021 offsetof_struct_ri_controller_rdram
+02309290 l     O .bss	00000029 offsetof_struct_rdram_dram
+00000000 l    d  .note.GNU-stack	00000000 .note.GNU-stack
+00000000 l    d  .comment	00000000 .comment
+00000000 l    d  .ARM.attributes	00000000 .ARM.attributes
+00000000         *UND*	00000000 __aeabi_unwind_cpp_pr0
+
+
